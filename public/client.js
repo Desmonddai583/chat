@@ -8,6 +8,7 @@ $(function() {
       $(".login").fadeOut();
       $(".chat").show();
       socket.emit('new user', username);
+      socket.username = username;
     }
   });
 
@@ -19,9 +20,11 @@ $(function() {
     $('#users > li').map(function() {
       $(this).click(function() {
         var username = $(this).text();
-        $('#m').text('');
-        $('#m').val('@' + username + ":");
-        $('#m').focus();
+        if(username != data.username) {
+          $('#m').text('');
+          $('#m').val('@' + username + ":");
+          $('#m').focus();    
+        }
       });
     });
   }
